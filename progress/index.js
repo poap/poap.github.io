@@ -38,10 +38,44 @@ function getData(server, character) {
 
 function load(data) {
     classIndex = data.class - 1;
+
+    target = data.progression.raids[40];
+    name = target.name;
+    length = target.bosses.length;
+    kills = [
+        target.bosses.map(function (x) {
+            return x.mythicKills;
+        }),
+        target.bosses.map(function (x) {
+            return x.heroicKills;
+        }),
+        target.bosses.map(function (x) {
+            return x.normalKills;
+        }),
+        target.bosses.map(function (x) {
+            return x.lfrKills;
+        })
+    ];
+    data_ = kills.map(function (x) {
+        return x.filter(function (x) {
+            return x > 0;
+        }).length;
+    });
+    backgroundColor = data_.map(function (x) {
+        return classColor[classIndex];
+    });
+    dataset = {
+        "label": data.name,
+        "data": data_,
+        "labelData": [target.bosses.map(function (x) {
+            return x.name;
+        }), kills],
+        "backgroundColor": backgroundColor
+    };
+    uldir.data.datasets.push(dataset);
+    uldir.update();
+
     target = data.progression.raids[39];
-    //console.log(data);
-    //console.log(target);
-    //console.log('\n\n');
     name = target.name;
     length = target.bosses.length;
     kills = [
@@ -229,6 +263,37 @@ getData("줄진", "커피에우유");
 
 document.body.style.backgroundColor = 'rgba(238, 238, 238, 1)';
 Chart.defaults.global.elements.rectangle.minSize = 2;
+
+var ctx_uldir = document.getElementById("uldir").getContext('2d');
+var uldir = new Chart(ctx_uldir, {
+    type: 'horizontalBar',
+    data: {
+        labels: ["Mythic", "Heroic", "Normal", "LFR"],
+        datasets: []
+    },
+    options: {
+        scales: {
+            xAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        },
+        tooltips: {
+            callbacks: {
+                label: function (tooltipItem, data) {
+                    var dataset = data.datasets[tooltipItem.datasetIndex];
+                    return dataset.labelData[0].map(function (x, i) {
+                        return x + ": " + dataset.labelData[1][tooltipItem.index][i] + "\n"
+                    })
+                }
+            },
+            displayColors: false,
+            mode: 'y',
+            position: 'nearest'
+        }
+    }
+});
 
 var ctx_antorus = document.getElementById("antorus").getContext('2d');
 var antorus = new Chart(ctx_antorus, {
