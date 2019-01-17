@@ -26,7 +26,6 @@ function getData(server, character) {
     r.open("GET", url, true);
     r.withCredentials = false;
     r.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-	r.setRequestHeader('Access-Control-Allow-Origin', '*');
     r.onreadystatechange = function () {
         if (r.readyState != 4 || r.status != 200) return;
         j = JSON.parse(r.responseText);
