@@ -22,7 +22,7 @@ function getData(server, character) {
     character = encodeURIComponent(character);
 
     var r = new XMLHttpRequest();
-    url = "https://kr.api.blizzard.com/wow/character/" + server + "/" + character + "?fields=progression,+reputation&locale=ko_KR&access_token=USqykSRNKrG3B81eCttqaWqUDMZpw4hN99";
+    url = "https://kr.api.blizzard.com/wow/character/" + server + "/" + character + "?fields=progression,+reputation&locale=ko_KR&access_token=US8hQ7pmeFiDLqko1eYQkppN60oW6UKFQk";
     r.open("GET", url, true);
     r.withCredentials = false;
     r.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
