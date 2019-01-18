@@ -34,229 +34,100 @@ function getData(server, character) {
     r.send(null);
 
     loading = false;
-};
+}
 
 function load(data) {
     classIndex = data.class - 1;
 
-    target = data.progression.raids[40];
-    name = target.name;
-    length = target.bosses.length;
-    kills = [
-        target.bosses.map(function (x) {
-            return x.mythicKills;
-        }),
-        target.bosses.map(function (x) {
-            return x.heroicKills;
-        }),
-        target.bosses.map(function (x) {
-            return x.normalKills;
-        }),
-        target.bosses.map(function (x) {
-            return x.lfrKills;
-        })
-    ];
-    data_ = kills.map(function (x) {
-        return x.filter(function (x) {
-            return x > 0;
-        }).length;
-    });
-    backgroundColor = data_.map(function (x) {
-        return classColor[classIndex];
-    });
-    dataset = {
-        "label": data.name,
-        "data": data_,
-        "labelData": [target.bosses.map(function (x) {
-            return x.name;
-        }), kills],
-        "backgroundColor": backgroundColor
-    };
-    uldir.data.datasets.push(dataset);
+    uldir.data.datasets.push(makeDataset(data.progression.raids[40], data.name));
     uldir.update();
 
-    target = data.progression.raids[39];
-    name = target.name;
-    length = target.bosses.length;
-    kills = [
-        target.bosses.map(function (x) {
-            return x.mythicKills;
-        }),
-        target.bosses.map(function (x) {
-            return x.heroicKills;
-        }),
-        target.bosses.map(function (x) {
-            return x.normalKills;
-        }),
-        target.bosses.map(function (x) {
-            return x.lfrKills;
-        })
-    ];
-    data_ = kills.map(function (x) {
-        return x.filter(function (x) {
-            return x > 0;
-        }).length;
-    });
-    backgroundColor = data_.map(function (x) {
-        return classColor[classIndex];
-    });
-    dataset = {
-        "label": data.name,
-        "data": data_,
-        "labelData": [target.bosses.map(function (x) {
-            return x.name;
-        }), kills],
-        "backgroundColor": backgroundColor
-    };
-    antorus.data.datasets.push(dataset);
+    antorus.data.datasets.push(makeDataset(data.progression.raids[39], data.name));
     antorus.update();
-	
-    target = data.progression.raids[38];
-    name = target.name;
-    length = target.bosses.length;
-    kills = [
-        target.bosses.map(function (x) {
-            return x.mythicKills;
-        }),
-        target.bosses.map(function (x) {
-            return x.heroicKills;
-        }),
-        target.bosses.map(function (x) {
-            return x.normalKills;
-        }),
-        target.bosses.map(function (x) {
-            return x.lfrKills;
-        })
-    ];
-    data_ = kills.map(function (x) {
-        return x.filter(function (x) {
-            return x > 0;
-        }).length;
-    });
-    backgroundColor = data_.map(function (x) {
-        return classColor[classIndex];
-    });
-    dataset = {
-        "label": data.name,
-        "data": data_,
-        "labelData": [target.bosses.map(function (x) {
-            return x.name;
-        }), kills],
-        "backgroundColor": backgroundColor
-    };
-    tos.data.datasets.push(dataset);
+
+    tos.data.datasets.push(makeDataset(data.progression.raids[38], data.name));
     tos.update();
-	
-    target = data.progression.raids[37];
-    name = target.name;
-    length = target.bosses.length;
-    kills = [
-        target.bosses.map(function (x) {
-            return x.mythicKills;
-        }),
-        target.bosses.map(function (x) {
-            return x.heroicKills;
-        }),
-        target.bosses.map(function (x) {
-            return x.normalKills;
-        }),
-        target.bosses.map(function (x) {
-            return x.lfrKills;
-        })
-    ];
-    data_ = kills.map(function (x) {
-        return x.filter(function (x) {
-            return x > 0;
-        }).length;
-    });
-    backgroundColor = data_.map(function (x) {
-        return classColor[classIndex];
-    });
-    dataset = {
-        "label": data.name,
-        "data": data_,
-        "labelData": [target.bosses.map(function (x) {
-            return x.name;
-        }), kills],
-        "backgroundColor": backgroundColor
-    };
-    nighthold.data.datasets.push(dataset);
+
+    nighthold.data.datasets.push(makeDataset(data.progression.raids[37], data.name));
     nighthold.update();
-	
-    target = data.progression.raids[36];
-    name = target.name;
-    length = target.bosses.length;
-    kills = [
-        target.bosses.map(function (x) {
-            return x.mythicKills;
-        }),
-        target.bosses.map(function (x) {
-            return x.heroicKills;
-        }),
-        target.bosses.map(function (x) {
-            return x.normalKills;
-        }),
-        target.bosses.map(function (x) {
-            return x.lfrKills;
-        })
-    ];
-    data_ = kills.map(function (x) {
-        return x.filter(function (x) {
-            return x > 0;
-        }).length;
-    });
-    backgroundColor = data_.map(function (x) {
-        return classColor[classIndex];
-    });
-    dataset = {
-        "label": data.name,
-        "data": data_,
-        "labelData": [target.bosses.map(function (x) {
-            return x.name;
-        }), kills],
-        "backgroundColor": backgroundColor
-    };
-    tov.data.datasets.push(dataset);
+
+    tov.data.datasets.push(makeDataset(data.progression.raids[36], data.name));
     tov.update();
-	
-    target = data.progression.raids[35];
-    name = target.name;
-    length = target.bosses.length;
-    kills = [
-        target.bosses.map(function (x) {
-            return x.mythicKills;
-        }),
-        target.bosses.map(function (x) {
-            return x.heroicKills;
-        }),
-        target.bosses.map(function (x) {
-            return x.normalKills;
-        }),
-        target.bosses.map(function (x) {
-            return x.lfrKills;
-        })
-    ];
-    data_ = kills.map(function (x) {
-        return x.filter(function (x) {
-            return x > 0;
-        }).length;
-    });
-    backgroundColor = data_.map(function (x) {
-        return classColor[classIndex];
-    });
-    dataset = {
-        "label": data.name,
-        "data": data_,
-        "labelData": [target.bosses.map(function (x) {
-            return x.name;
-        }), kills],
-        "backgroundColor": backgroundColor
-    };
-    emerald_nightmare.data.datasets.push(dataset);
+
+    emerald_nightmare.data.datasets.push(makeDataset(data.progression.raids[35], data.name));
     emerald_nightmare.update();
 
     if (test_.length > 0) getData("줄진", test_.pop());
-};
+}
+
+function makeDataset(target, character_name) {
+    //raid_name = target.name;
+    //length = target.bosses.length;
+    kills = [
+        target.bosses.map(function (x) {
+            return x.mythicKills;
+        }),
+        target.bosses.map(function (x) {
+            return x.heroicKills;
+        }),
+        target.bosses.map(function (x) {
+            return x.normalKills;
+        }),
+        target.bosses.map(function (x) {
+            return x.lfrKills;
+        })
+    ];
+    data_ = kills.map(function (x) {
+        return x.filter(function (x) {
+            return x > 0;
+        }).length;
+    });
+    backgroundColor = data_.map(function (x) {
+        return classColor[classIndex];
+    });
+    dataset = {
+        "label": character_name,
+        "data": data_,
+        "labelData": [target.bosses.map(function (x) {
+            return x.name;
+        }), kills],
+        "backgroundColor": backgroundColor
+    };
+
+    return dataset;
+}
+
+function makeChart(element_id) {
+    return new Chart(document.getElementById(element_id).getContext('2d'), {
+        type: 'horizontalBar',
+        data: {
+            labels: ["Mythic", "Heroic", "Normal", "LFR"],
+            datasets: []
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            tooltips: {
+                callbacks: {
+                    label: function (tooltipItem, data) {
+                        var dataset = data.datasets[tooltipItem.datasetIndex];
+                        return dataset.labelData[0].map(function (x, i) {
+                            return x + ": " + dataset.labelData[1][tooltipItem.index][i] + "\n"
+                        })
+                    }
+                },
+                displayColors: false,
+                mode: 'y',
+                position: 'nearest'
+            }
+        }
+    });
+}
 
 var j = [];
 getData("줄진", "커피에우유");
@@ -264,188 +135,10 @@ getData("줄진", "커피에우유");
 document.body.style.backgroundColor = 'rgba(238, 238, 238, 1)';
 Chart.defaults.global.elements.rectangle.minSize = 2;
 
-var ctx_uldir = document.getElementById("uldir").getContext('2d');
-var uldir = new Chart(ctx_uldir, {
-    type: 'horizontalBar',
-    data: {
-        labels: ["Mythic", "Heroic", "Normal", "LFR"],
-        datasets: []
-    },
-    options: {
-        scales: {
-            xAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        },
-        tooltips: {
-            callbacks: {
-                label: function (tooltipItem, data) {
-                    var dataset = data.datasets[tooltipItem.datasetIndex];
-                    return dataset.labelData[0].map(function (x, i) {
-                        return x + ": " + dataset.labelData[1][tooltipItem.index][i] + "\n"
-                    })
-                }
-            },
-            displayColors: false,
-            mode: 'y',
-            position: 'nearest'
-        }
-    }
-});
+var uldir = makeChart('uldir');
+var antorus = makeChart('antorus');
+var tos = makeChart('tos');
+var nighthold = makeChart('nighthold');
+var tov = makeChart('tov');
+var emerald_nightmare = makeChart('emerald_nightmare');
 
-var ctx_antorus = document.getElementById("antorus").getContext('2d');
-var antorus = new Chart(ctx_antorus, {
-    type: 'horizontalBar',
-    data: {
-        labels: ["Mythic", "Heroic", "Normal", "LFR"],
-        datasets: []
-    },
-    options: {
-        scales: {
-            xAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        },
-        tooltips: {
-            callbacks: {
-                label: function (tooltipItem, data) {
-                    var dataset = data.datasets[tooltipItem.datasetIndex];
-                    return dataset.labelData[0].map(function (x, i) {
-                        return x + ": " + dataset.labelData[1][tooltipItem.index][i] + "\n"
-                    })
-                }
-            },
-            displayColors: false,
-            mode: 'y',
-            position: 'nearest'
-        }
-    }
-});
-
-var ctx_tos = document.getElementById("tos").getContext('2d');
-var tos = new Chart(ctx_tos, {
-    type: 'horizontalBar',
-    data: {
-        labels: ["Mythic", "Heroic", "Normal", "LFR"],
-        datasets: []
-    },
-    options: {
-        scales: {
-            xAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        },
-        tooltips: {
-            callbacks: {
-                label: function (tooltipItem, data) {
-                    var dataset = data.datasets[tooltipItem.datasetIndex];
-                    return dataset.labelData[0].map(function (x, i) {
-                        return x + ": " + dataset.labelData[1][tooltipItem.index][i] + "\n"
-                    })
-                }
-            },
-            displayColors: false,
-            mode: 'y',
-            position: 'nearest'
-        }
-    }
-});
-
-var ctx_nighthold = document.getElementById("nighthold").getContext('2d');
-var nighthold = new Chart(ctx_nighthold, {
-    type: 'horizontalBar',
-    data: {
-        labels: ["Mythic", "Heroic", "Normal", "LFR"],
-        datasets: []
-    },
-    options: {
-        scales: {
-            xAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        },
-        tooltips: {
-            callbacks: {
-                label: function (tooltipItem, data) {
-                    var dataset = data.datasets[tooltipItem.datasetIndex];
-                    return dataset.labelData[0].map(function (x, i) {
-                        return x + ": " + dataset.labelData[1][tooltipItem.index][i] + "\n"
-                    })
-                }
-            },
-            displayColors: false,
-            mode: 'y',
-            position: 'nearest'
-        }
-    }
-});
-
-var ctx_tov = document.getElementById("tov").getContext('2d');
-var tov = new Chart(ctx_tov, {
-    type: 'horizontalBar',
-    data: {
-        labels: ["Mythic", "Heroic", "Normal", "LFR"],
-        datasets: []
-    },
-    options: {
-        scales: {
-            xAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        },
-        tooltips: {
-            callbacks: {
-                label: function (tooltipItem, data) {
-                    var dataset = data.datasets[tooltipItem.datasetIndex];
-                    return dataset.labelData[0].map(function (x, i) {
-                        return x + ": " + dataset.labelData[1][tooltipItem.index][i] + "\n"
-                    })
-                }
-            },
-            displayColors: false,
-            mode: 'y',
-            position: 'nearest'
-        }
-    }
-});
-
-var ctx_emerald_nightmare = document.getElementById("emerald_nightmare").getContext('2d');
-var emerald_nightmare = new Chart(ctx_emerald_nightmare, {
-    type: 'horizontalBar',
-    data: {
-        labels: ["Mythic", "Heroic", "Normal", "LFR"],
-        datasets: []
-    },
-    options: {
-        scales: {
-            xAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        },
-        tooltips: {
-            callbacks: {
-                label: function (tooltipItem, data) {
-                    var dataset = data.datasets[tooltipItem.datasetIndex];
-                    return dataset.labelData[0].map(function (x, i) {
-                        return x + ": " + dataset.labelData[1][tooltipItem.index][i] + "\n"
-                    })
-                }
-            },
-            displayColors: false,
-            mode: 'y',
-            position: 'nearest'
-        }
-    }
-});
