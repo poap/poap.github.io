@@ -39,6 +39,9 @@ function getData(server, character) {
 function load(data) {
     classIndex = data.class - 1;
 
+    bod.data.datasets.push(makeDataset(data.progression.raids[41], data.name));
+    bod.update();
+
     uldir.data.datasets.push(makeDataset(data.progression.raids[40], data.name));
     uldir.update();
 
@@ -136,6 +139,7 @@ getData("줄진", "커피에우유");
 document.body.style.backgroundColor = 'rgba(238, 238, 238, 1)';
 Chart.defaults.global.elements.rectangle.minSize = 2;
 
+var bod = makeChart('bod')
 var uldir = makeChart('uldir');
 var antorus = makeChart('antorus');
 var tos = makeChart('tos');
