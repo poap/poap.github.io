@@ -22,7 +22,7 @@ function getData(server, character) {
     character = encodeURIComponent(character);
 
     var r = new XMLHttpRequest();
-    url = "https://kr.api.blizzard.com/wow/character/" + server + "/" + character + "?fields=progression,+reputation&locale=ko_KR&access_token=US8hQ7pmeFiDLqko1eYQkppN60oW6UKFQk";
+    url = "https://kr.api.blizzard.com/wow/character/" + server + "/" + character + "?fields=progression,+reputation&locale=ko_KR&access_token=" + at;
     r.open("GET", url, true);
     r.withCredentials = false;
     r.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
@@ -130,6 +130,7 @@ function makeChart(element_id) {
 }
 
 var j = [];
+var at = window.prompt("","");
 getData("줄진", "커피에우유");
 
 document.body.style.backgroundColor = 'rgba(238, 238, 238, 1)';
