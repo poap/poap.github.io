@@ -22,7 +22,7 @@ function getData(server, character) {
     character = encodeURIComponent(character);
 
     var r = new XMLHttpRequest();
-    url = "https://kr.api.blizzard.com/wow/character/" + server + "/" + character + "?fields=progression,+reputation&locale=ko_KR&access_token=" + at;
+    var url = "https://kr.api.blizzard.com/wow/character/" + server + "/" + character + "?fields=progression,+reputation&locale=ko_KR&access_token=" + at;
     r.open("GET", url, true);
     r.withCredentials = false;
     r.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
@@ -37,36 +37,18 @@ function getData(server, character) {
 }
 
 function load(data) {
-    classIndex = data.class - 1;
-
-    bod.data.datasets.push(makeDataset(data.progression.raids[41], data.name));
-    bod.update();
-
-    uldir.data.datasets.push(makeDataset(data.progression.raids[40], data.name));
-    uldir.update();
-
-    antorus.data.datasets.push(makeDataset(data.progression.raids[39], data.name));
-    antorus.update();
-
-    tos.data.datasets.push(makeDataset(data.progression.raids[38], data.name));
-    tos.update();
-
-    nighthold.data.datasets.push(makeDataset(data.progression.raids[37], data.name));
-    nighthold.update();
-
-    tov.data.datasets.push(makeDataset(data.progression.raids[36], data.name));
-    tov.update();
-
-    emerald_nightmare.data.datasets.push(makeDataset(data.progression.raids[35], data.name));
-    emerald_nightmare.update();
+    for(var i=0; i<charts.length; i++) {
+        charts[i].data.datasets.push(makeDataset(data.progression.raids[41-i], data.name, data.class - 1));
+        charts[i].update();
+    }
 
     if (test_.length > 0) getData("줄진", test_.pop());
 }
 
-function makeDataset(target, character_name) {
+function makeDataset(target, character_name, classIndex) {
     //raid_name = target.name;
     //length = target.bosses.length;
-    kills = [
+    var kills = [
         target.bosses.map(function (x) {
             return x.mythicKills;
         }),
@@ -80,15 +62,15 @@ function makeDataset(target, character_name) {
             return x.lfrKills;
         })
     ];
-    data_ = kills.map(function (x) {
+    var data_ = kills.map(function (x) {
         return x.filter(function (x) {
             return x > 0;
         }).length;
     });
-    backgroundColor = data_.map(function (x) {
+    var backgroundColor = data_.map(function (x) {
         return classColor[classIndex];
     });
-    dataset = {
+    var dataset = {
         "label": character_name,
         "data": data_,
         "labelData": [target.bosses.map(function (x) {
@@ -139,11 +121,12 @@ getData("줄진", "커피에우유");
 document.body.style.backgroundColor = 'rgba(238, 238, 238, 1)';
 Chart.defaults.global.elements.rectangle.minSize = 2;
 
-var bod = makeChart('bod')
-var uldir = makeChart('uldir');
-var antorus = makeChart('antorus');
-var tos = makeChart('tos');
-var nighthold = makeChart('nighthold');
-var tov = makeChart('tov');
-var emerald_nightmare = makeChart('emerald_nightmare');
-
+var charts = [
+    makeChart('bod'),
+    makeChart('uldir'),
+    makeChart('antorus'),
+    makeChart('tos'),
+    makeChart('nighthold'),
+    makeChart('tov'),
+    makeChart('emerald_nightmare')
+];
